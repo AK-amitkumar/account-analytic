@@ -26,7 +26,7 @@ class TestAnalyticPartnerHrTimesheetInvoice(common.TransactionCase):
              'account_id': self.analytic_account.id,
              'unit_amount': 1.0,
              'amount': 100.0,
-             'date': fields.Date.today(),
+         date = fields.Date.today()
              'general_account_id': self.env.ref('account.a_recv').id,
              'journal_id': self.env.ref('account.analytic_journal_sale').id,
              'to_invoice': self.analytic_account.to_invoice.id,
@@ -36,7 +36,7 @@ class TestAnalyticPartnerHrTimesheetInvoice(common.TransactionCase):
              'account_id': self.analytic_account.id,
              'unit_amount': 1.0,
              'amount': 200.0,
-             'date': fields.Date.today(),
+         date = fields.Date.today()
              'general_account_id': self.env.ref('account.a_recv').id,
              'journal_id': self.env.ref('account.analytic_journal_sale').id,
              'to_invoice': self.analytic_account.to_invoice.id})

@@ -30,13 +30,13 @@
 ##############################################################################
 
 from osv import fields
-from osv import osv
+from osv import models
 import decimal_precision as dp
 
 
-class project_activity_al(osv.osv):
+class project_activity_al(models.Model):
 
-    """Class that inhertis osv.osv and add 2nd analytic axe to account analytic
+    """Class that inhertis models.Model and add 2nd analytic axe to account analytic
     lines.
     The _name is kept for previous version compatibility (project.activity_al).
     """
@@ -94,7 +94,7 @@ class project_activity_al(osv.osv):
     # @param self The object pointer.
     # @param cr a psycopg cursor.
     # @param uid res.user.id that is currently loged
-    # @param name osv._obj name of the serached object
+    # @param name models._obj name of the serached object
     # @param args an arbitrary list that contains search criterium
     # @param operator search operator
     # @param context an arbitrary context
@@ -102,7 +102,7 @@ class project_activity_al(osv.osv):
     # @return the result of name get
     def name_search(self, cr, uid, name, args=None,
                     operator='ilike', context=None, limit=80):
-        """ Ovveride of osv.osv name serach function that do the search
+        """ Ovveride of models.Model name serach function that do the search
             on the name of the activites """
         if not args:
             args = []
@@ -253,63 +253,63 @@ class project_activity_al(osv.osv):
         user = self.pool.get('res.users').browse(cr, uid, uid, context=context)
         return user.company_id.currency_id.id
 
-    _columns = {
+
         # activity code
-        'code': fields.char('Code', required=True, size=64),
+    code = fields.Char('Code', required=True, size=64)
         # name of the code
-        'name': fields.char('Activity', required=True, size=64,
+    name = fields.Char('Activity', required=True, size=64
                             translate=True),
         # parent activity
-        'parent_id': fields.many2one('project.activity_al', 'Parent activity'),
+    parent_id = fields.Many2one('project.activity_al', 'Parent activity')
         # link to account.analytic account
-        'project_ids': fields.many2many(
+        'project_ids': fields.Many2many(
             'account.analytic.account',
             'proj_activity_analytic_rel',
             'activity_id', 'analytic_id',
             'Concerned Analytic Account'
         ),
         # link to the children activites
-        'child_ids': fields.one2many(
+        'child_ids': fields.One2many(
             'project.activity_al',
             'parent_id',
             'Childs Activities'
         ),
-        'balance': fields.function(
+        'balance': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Balance',
             multi='debit_credit_bal_qtty',
             digits_compute=dp.get_precision('Account')),
-        'debit': fields.function(
+        'debit': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Debit',
             multi='debit_credit_bal_qtty',
             digits_compute=dp.get_precision('Account')),
-        'credit': fields.function(
+        'credit': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Credit',
             multi='debit_credit_bal_qtty',
             digits_compute=dp.get_precision('Account')),
-        'quantity': fields.function(
+        'quantity': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Quantity',
             multi='debit_credit_bal_qtty'),
-        'currency_id': fields.many2one(
+        'currency_id': fields.Many2one(
             'res.currency',
             'Activity currency',
             required=True),
-        'company_id': fields.many2one(
+        'company_id': fields.Many2one(
             'res.company',
             'Company',
             required=False),
-    }
+
 
     _defaults = {
         'company_id': _default_company,
@@ -317,12 +317,12 @@ class project_activity_al(osv.osv):
     }
 
 
-class analytic_account(osv.osv):
+class analytic_account(models.Model):
     _inherit = "account.analytic.account"
 
-    _columns = {
+
         # Link activity and project
-        'activity_ids': fields.many2many(
+        'activity_ids': fields.Many2many(
             'project.activity_al',
             'proj_activity_analytic_rel',
             'analytic_id',
@@ -330,13 +330,13 @@ class analytic_account(osv.osv):
             'Related activities'
         ),
 
-    }
 
 
-class account_analytic_line(osv.osv):
+
+class account_analytic_line(models.Model):
     _name = "account.analytic.line"
     _inherit = "account.analytic.line"
 
-    _columns = {
-        'activity': fields.many2one('project.activity_al', 'Activity'),
-    }
+
+    activity = fields.Many2one('project.activity_al', 'Activity')
+

@@ -20,11 +20,11 @@
 ##############################################################################
 
 from itertools import product
-from openerp.osv import orm, fields
+from openerp import fields
 import openerp.addons.decimal_precision as dp
 
 
-class account_analytic_account(orm.Model):
+class account_analytic_account(models.Model):
     _inherit = "account.analytic.account"
 
     def _ca_invoiced_calc(self, cr, uid, ids, name, arg, context=None):
@@ -85,15 +85,15 @@ class account_analytic_account(orm.Model):
         return dict((account_id, row[name]) for account_id, row
                     in data.iteritems())
 
-    _columns = {
-        'ca_invoiced': fields.function(
+
+        'ca_invoiced': fields.Function(
             _ca_invoiced_calc,
             type='float',
             string='Invoiced Amount',
             help="Total customer invoiced amount for "
                  "this account.",
             digits_compute=dp.get_precision('Account')),
-        'total_cost': fields.function(
+        'total_cost': fields.Function(
             _total_cost_calc,
             type='float',
             string='Total Costs',
@@ -102,4 +102,4 @@ class account_analytic_account(orm.Model):
                  "invoices) and indirect costs, "
                  "like time spent on timesheets.",
             digits_compute=dp.get_precision('Account')),
-    }
+

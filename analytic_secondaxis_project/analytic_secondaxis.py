@@ -30,14 +30,14 @@
 ##############################################################################
 
 from osv import fields
-from osv import osv
+from osv import models
 
 
-class project_work(osv.osv):
+class project_work(models.Model):
     _inherit = "project.task.work"
-    _columns = {
-        'activity': fields.many2one('project.activity_al', 'Activity'),
-    }
+
+    activity = fields.Many2one('project.activity_al', 'Activity')
+
 
     def create(self, cr, uid, vals, *args, **kwargs):
         res = super(project_work, self).create(cr, uid, vals, *args, **kwargs)
@@ -65,8 +65,8 @@ class project_work(osv.osv):
         return res
 
 
-class project_activity_al(osv.osv):
-    """Class that inhertis osv.osv and add 2nd analytic axe to account analytic
+class project_activity_al(models.Model):
+    """Class that inhertis models.Model and add 2nd analytic axe to account analytic
     lines.  The _name is kept for previous version compatibility
     (project.activity_al)."""
     # Keep that name for back -patibility

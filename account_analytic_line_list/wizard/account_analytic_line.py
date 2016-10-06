@@ -20,18 +20,18 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import orm, fields
+from openerp import fields
 
 
-class AccountAnalyticViewLine(orm.TransientModel):
+class AccountAnalyticViewLine(models.TransientModel):
     _name = "account.analytic.view.line"
     _description = "Account Analytic View Line"
 
-    _columns = {
-        'analytic_id': fields.many2one('account.analytic.account',
+
+    analytic_id = fields.Many2one('account.analytic.account'
                                        'Analytic Account', required=True),
-        'children': fields.boolean('With children'),
-    }
+    children = fields.Boolean('With children')
+
 
     def _append_childs(self, cr, uid, accounts, analytic_obj):
         for child in analytic_obj.child_complete_ids:
