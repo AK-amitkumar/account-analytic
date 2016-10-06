@@ -19,11 +19,11 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+from openerp import fields
 import openerp.addons.decimal_precision as dp
 
 
-class account_analytic_line(orm.Model):
+class account_analytic_line(models.Model):
     _inherit = 'account.analytic.line'
 
     def _amount_currency(self, cr, uid, ids, field_name, arg, context=None):
@@ -68,8 +68,8 @@ class account_analytic_line(orm.Model):
     # analytic line.
     # The company_id of analytic line is always related to the company
     # of the general account linked on the line
-    _columns = {
-        'aa_currency_id': fields.function(
+
+        'aa_currency_id': fields.Function(
             _get_account_currency,
             type='many2one',
             relation='res.currency',
@@ -86,7 +86,7 @@ class account_analytic_line(orm.Model):
                                           10),
             },
             help="The related analytic account currency."),
-        'aa_amount_currency': fields.function(
+        'aa_amount_currency': fields.Function(
             _amount_currency,
             string='Analytic Amount currency',
             digits_compute=dp.get_precision('Account'),
@@ -103,7 +103,7 @@ class account_analytic_line(orm.Model):
             },
             help="The amount expressed in the related analytic account "
                  "currency."),
-        'company_id': fields.related(
+        'company_id': fields.Related(
             'general_account_id',
             'company_id',
             type='many2one',
@@ -111,7 +111,7 @@ class account_analytic_line(orm.Model):
             string='Company',
             store=True,
             readonly=True),
-    }
+
 
     def on_change_unit_amount(self, cr, uid, ids, prod_id, quantity,
                               company_id, unit=False, journal_id=False,

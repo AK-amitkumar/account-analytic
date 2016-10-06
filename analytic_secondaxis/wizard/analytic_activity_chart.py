@@ -20,17 +20,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from osv import osv, fields
+from osv import models, fields
 
 
-class activities_analytic_chart(osv.osv_memory):
+class activities_analytic_chart(models.TransientModel):
     _name = 'activities.analytic.chart'
     _description = 'Analytic Activities Chart'
 
-    _columns = {
-        'from_date': fields.date('From'),
-        'to_date': fields.date('To'),
-    }
+
+    from_date = fields.Date('From')
+    to_date = fields.Date('To')
+
 
     def analytic_activities_chart_open_window(self, cr, uid, ids,
                                               context=None):

@@ -23,7 +23,7 @@
 from datetime import datetime
 
 from openerp.tests import common
-from openerp.osv import orm
+
 
 
 class test_account_analytic_plan_required(common.TransactionCase):
@@ -85,14 +85,14 @@ class test_account_analytic_plan_required(common.TransactionCase):
         self._create_move(with_analytic=False, with_analytic_plan=True)
 
     def test_exclusive(self):
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=True, with_analytic_plan=True)
 
     def test_always_no_analytic(self):
         self._set_analytic_policy('always')
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=False, with_analytic_plan=False)
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=False, with_analytic_plan=True)
 
     def test_always_no_analytic_0(self):
@@ -107,9 +107,9 @@ class test_account_analytic_plan_required(common.TransactionCase):
 
     def test_always_plan_no_analytic_plan(self):
         self._set_analytic_policy('always_plan')
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=False, with_analytic_plan=False)
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=True, with_analytic_plan=False)
 
     def test_always_plan_no_analytic_plan_0(self):
@@ -124,7 +124,7 @@ class test_account_analytic_plan_required(common.TransactionCase):
 
     def test_always_plan_or_account_nothing(self):
         self._set_analytic_policy('always_plan_or_account')
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=False, with_analytic_plan=False)
 
     def test_always_plan_or_account_no_analytic_plan_0(self):
@@ -148,9 +148,9 @@ class test_account_analytic_plan_required(common.TransactionCase):
 
     def test_never_with_analytic(self):
         self._set_analytic_policy('never')
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=True, with_analytic_plan=False)
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self._create_move(with_analytic=False, with_analytic_plan=True)
 
     def test_never_with_analytic_0(self):
@@ -166,7 +166,7 @@ class test_account_analytic_plan_required(common.TransactionCase):
         self._set_analytic_policy('always_plan')
         line_id = self._create_move(with_analytic=False,
                                     with_analytic_plan=True)
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self.move_line_obj.write(self.cr, self.uid, [line_id],
                                      {'analytics_id': False})
 
@@ -176,7 +176,7 @@ class test_account_analytic_plan_required(common.TransactionCase):
                                     with_analytic_plan=False)
         # change account to a_expense with policy always_plan but missing
         # analytic distribution
-        with self.assertRaises(orm.except_orm):
+        with self.assertRaises(models.except_orm):
             self.move_line_obj.write(
                 self.cr, self.uid, [line_id],
                 {'account_id': self.ref('account.a_expense')})

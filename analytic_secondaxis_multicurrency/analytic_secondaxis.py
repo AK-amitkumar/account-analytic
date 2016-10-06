@@ -30,7 +30,7 @@
 ##############################################################################
 
 from osv import fields
-from osv import osv
+from osv import models
 import decimal_precision as dp
 
 ##########################################################################
@@ -38,9 +38,9 @@ import decimal_precision as dp
 ##########################################################################
 
 
-class project_activity_al(osv.osv):
+class project_activity_al(models.Model):
 
-    """Class that inhertis osv.osv and add 2nd analytic axe to account analytic
+    """Class that inhertis models.Model and add 2nd analytic axe to account analytic
     lines. The _name is kept for previous version compatibility
     (project.activity_al)."""
     # Keep that name for back -patibility
@@ -98,33 +98,33 @@ class project_activity_al(osv.osv):
             'debit', 'credit', 'balance', 'quantity'
         ], context)
 
-    _columns = {
-        'balance': fields.function(
+
+        'balance': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Balance',
             multi='debit_credit_bal_qtty',
             digits_compute=dp.get_precision('Account')),
-        'debit': fields.function(
+        'debit': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Debit',
             multi='debit_credit_bal_qtty',
             digits_compute=dp.get_precision('Account')),
-        'credit': fields.function(
+        'credit': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Credit',
             multi='debit_credit_bal_qtty',
             digits_compute=dp.get_precision('Account')),
-        'quantity': fields.function(
+        'quantity': fields.Function(
             _debit_credit_bal_qtty,
             method=True,
             type='float',
             string='Quantity', multi='debit_credit_bal_qtty'),
-    }
+
 
 project_activity_al()

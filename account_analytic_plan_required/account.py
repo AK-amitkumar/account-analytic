@@ -20,11 +20,11 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+
 from openerp.tools.translate import _
 
 
-class account_account_type(orm.Model):
+class account_account_type(models.Model):
     _inherit = "account.account.type"
 
     def _get_policies(self, cr, uid, context=None):
@@ -38,7 +38,7 @@ class account_account_type(orm.Model):
         return policies
 
 
-class account_move_line(orm.Model):
+class account_move_line(models.Model):
     _inherit = "account.move.line"
 
     def _check_analytic_plan_required_msg(self, cr, uid, ids, context=None):

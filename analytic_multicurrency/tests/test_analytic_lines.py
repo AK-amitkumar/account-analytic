@@ -79,7 +79,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -90,7 +90,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_currency_with_currency_rate(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -101,7 +101,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -110,7 +110,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_with_currency_rate_and_double_currency_change(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -119,7 +119,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -134,7 +134,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_currency_with_currency_rate_and_currency_change(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -145,7 +145,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -155,7 +155,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_ca_total_cost_with_currency_rate_and_currency_change(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -166,7 +166,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -178,7 +178,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': -200,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -191,7 +191,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_with_currency_rate_and_currency_change_2_lines(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -202,7 +202,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -214,7 +214,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': -200,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -231,7 +231,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_with_currency_rate_and_dbl_currency_change_2_lines(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -242,7 +242,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': 100,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -254,7 +254,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': -200,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -300,7 +300,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': -200,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -328,7 +328,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': -200,
             'general_account_id': self.account_rcv_id.id,
         })
@@ -342,7 +342,7 @@ class TestAnalyticLine(common.TransactionCase):
 
     def test_amount_with_context_from_date_date_to(self):
         self.res_currency_rate_model.create({
-            'name': fields.Date.today() + ' 00:00:00',
+        name = fields.Date.today() + ' 00:00:00'
             'currency_id': self.currency_usd_id.id,
             'rate': 0.50,
         })
@@ -364,7 +364,7 @@ class TestAnalyticLine(common.TransactionCase):
             'account_id': self.agrolait.id,
             'name': 'AGROLAIT',
             'journal_id': self.aajournal.id,
-            'date': fields.Date.today(),
+        date = fields.Date.today()
             'amount': -200,
             'general_account_id': self.account_rcv_id.id,
         })

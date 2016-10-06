@@ -20,11 +20,11 @@
 ##############################################################################
 
 from itertools import product
-from openerp.osv import orm, fields
+from openerp import fields
 import openerp.addons.decimal_precision as dp
 
 
-class account_analytic_account(orm.Model):
+class account_analytic_account(models.Model):
     _inherit = 'account.analytic.account'
 
     def _debit_credit_bal_qtty(self, cr, uid, ids, field_list, arg,
@@ -112,29 +112,29 @@ class account_analytic_account(orm.Model):
             ])
         return accounts
 
-    _columns = {
-        'balance': fields.function(_debit_credit_bal_qtty,
+
+    balance = fields.Function(_debit_credit_bal_qtty
                                    type='float',
                                    string='Balance',
                                    multi='debit_credit_bal_qtty',
                                    digits_compute=dp.get_precision('Account')),
-        'debit': fields.function(_debit_credit_bal_qtty,
+    debit = fields.Function(_debit_credit_bal_qtty
                                  type='float',
                                  string='Debit',
                                  multi='debit_credit_bal_qtty',
                                  digits_compute=dp.get_precision('Account')),
-        'credit': fields.function(_debit_credit_bal_qtty,
+    credit = fields.Function(_debit_credit_bal_qtty
                                   type='float',
                                   string='Credit',
                                   multi='debit_credit_bal_qtty',
                                   digits_compute=dp.get_precision('Account')),
-        'quantity': fields.function(_debit_credit_bal_qtty,
+    quantity = fields.Function(_debit_credit_bal_qtty
                                     type='float',
                                     string='Quantity',
                                     multi='debit_credit_bal_qtty'),
         # We overwrite function field currency_id to set a currency different
         # from the one specified in the company
-        'currency_id': fields.function(
+        'currency_id': fields.Function(
             _currency,
             fnct_inv=_set_company_currency,
             store={
@@ -143,7 +143,7 @@ class account_analytic_account(orm.Model):
             string='Currency',
             type='many2one',
             relation='res.currency'),
-    }
+
 
     # We remove the currency constraint cause we want to let the user
     # choose another currency than the company one. Don't be able to
